@@ -4,6 +4,13 @@ import router from "./router";
 import axios from "axios";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import jwt_decode from "jwt-decode";
+import store from "./store";
+import iconfont from "../public/font.css";
+
+Vue.use(iconfont);
+
+Vue.prototype.$decode = jwt_decode;
 
 Vue.prototype.$axios = axios;
 
@@ -68,4 +75,5 @@ axios.interceptors.request.use(
 new Vue({
   render: (h) => h(App),
   router,
+  store,
 }).$mount("#app");

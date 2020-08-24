@@ -5,6 +5,7 @@
       :key="article._id"
       class="onedisplay"
       @click="reg(article._id)"
+      v-rainbow
     >
       <div class="title">
         <span>{{ article.title }}</span>
@@ -65,10 +66,22 @@ export default {
   //自动更新表格里的数据
   computed: {
     articlesPart() {
+      console.log(this.articles);
       return this.articles.slice(
         this.pagesize * (this.currentPage - 1),
         this.pagesize * this.currentPage
       );
+    },
+  },
+  directives: {
+    rainbow: {
+      bind(el, binding, vnode) {
+        el.style.borderLeftColor =
+          "#" +
+          Math.random()
+            .toString(16)
+            .slice(2, 8);
+      },
     },
   },
 };
@@ -79,10 +92,10 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 20px;
+  /* margin: 20px; */
 }
 .onedisplay {
-  width: 80%;
+  width: 100%;
   height: 90px;
   display: flex;
   flex-wrap: wrap;
@@ -90,6 +103,12 @@ export default {
   background-color: #eee;
   border-radius: 10px;
   overflow: hidden;
+  cursor: pointer;
+  border-left: 1px solid;
+}
+.onedisplay:hover {
+  transform: scale(1.2);
+  transition: all 0.55s;
 }
 .title {
   font-size: 20px;
@@ -110,5 +129,8 @@ export default {
 }
 .category {
   margin-right: 10px;
+}
+.block {
+  width: 100%;
 }
 </style>

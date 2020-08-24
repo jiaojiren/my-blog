@@ -25,6 +25,47 @@ router.get("/all", (req, res) => {
     .catch((err) => res.status(404).json(err));
 });
 
+//$route get api/article/desc
+//@desc 获取标签数组
+//@access public
+router.get("/desc", (req, res) => {
+  let result = [];
+  let descArr = {};
+  Article.find()
+    .then((data) => {
+      if (data) {
+        // res.json(data);
+        data.forEach((item) => {
+          let index = item.desc;
+          if (descArr.hasOwnProperty(index)) {
+            descArr[index]++;
+          } else {
+            descArr[index] = 1;
+          }
+        });
+      }
+      for (desc in descArr) {
+        let item = { type: desc, number: descArr[desc] };
+        result.push(item);
+      }
+      res.json(result);
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+//$route get api/article/bydesc
+//@desc 根据标签获取文章
+//@access public
+router.get("/bydesc/:desc", (req, res) => {
+  Article.find({ desc: req.params.desc })
+    .then((data) => {
+      if (data) {
+        res.json(data);
+      }
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
 //$route GET api/article/new
 //@desc 添加文章
 //@access private

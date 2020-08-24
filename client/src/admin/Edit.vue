@@ -78,6 +78,7 @@ export default {
               this.$message({
                 type: "success",
                 message: "删除成功!",
+                duration: 600,
               });
             })
             .catch((res) => {});

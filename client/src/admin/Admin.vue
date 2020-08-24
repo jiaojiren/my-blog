@@ -49,6 +49,7 @@ export default {
           localStorage.removeItem("blogtoken");
           this.$router.push("/");
           this.$message({
+            duration: 600,
             type: "success",
             message: "退出成功!",
           });
@@ -57,6 +58,7 @@ export default {
           this.$message({
             type: "info",
             message: "已取消退出",
+            duration: 600,
           });
         });
     },

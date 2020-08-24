@@ -1,21 +1,25 @@
 <template>
   <div id="app">
     <Nav></Nav>
-    <router-view style="margin-top:60px"></router-view>
+    <router-view style="margin-top:60px; "></router-view>
+    <Foot></Foot>
   </div>
 </template>
 
 <script>
 import Nav from "./components/Nav";
-import jwt_decode from "jwt-decode";
+import Foot from "./components/Foot";
+// import jwt_decode from "jwt-decode";
 export default {
   name: "App",
   components: {
     Nav,
+    Foot,
   },
   created() {
     if (localStorage.blogtoken) {
-      const decoded = jwt_decode(localStorage.blogtoken);
+      const decoded = this.$decode(localStorage.blogtoken);
+      // console.log(decoded);
       // 获取当前时间
       const currentTime = Date.now() / 1000;
       // console.log(currentTime);
@@ -23,6 +27,9 @@ export default {
       //检测token是否过期
       if (decoded.exp < currentTime) {
         localStorage.removeItem("blogtoken");
+        this.$store.dispatch("setUser", {});
+      } else {
+        this.$store.dispatch("setUser", decoded);
       }
     }
   },
@@ -51,6 +58,7 @@ ul {
 }
 a {
   text-decoration: none;
+  color: #f5f5f5;
 }
 img {
   vertical-align: top;

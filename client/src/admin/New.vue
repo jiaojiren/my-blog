@@ -30,8 +30,9 @@
 <script>
 import marked from "marked";
 import hljs from "highlight.js";
-import javascript from "highlight.js/lib/languages/javascript";
-// import "highlight.js/styles/monokai-sublime.css";
+// import javascript from "highlight.js/lib/languages/javascript";
+import "highlight.js/styles/monokai-sublime.css";
+import "../assets/detailed.css";
 
 export default {
   name: "New",
